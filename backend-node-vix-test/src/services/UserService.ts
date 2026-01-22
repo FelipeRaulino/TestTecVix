@@ -5,6 +5,7 @@ import { UserModel } from "../models/UserModel";
 import { querySchema } from "../types/validations/Queries/queryListAll";
 import { userCreatedSchema } from "../types/validations/User/createUser";
 import { userUpdatedSchema } from "../types/validations/User/updateUser";
+import bcrypt from "bcryptjs";
 
 export class UserService {
   constructor() {}
@@ -58,8 +59,11 @@ export class UserService {
       );
     }
 
+    const encriptedPassword = await bcrypt.hash(validateData.password, 10);
+
     const createdUser = await this.userModel.createNewUser({
       ...validateData,
+      password: encriptedPassword,
     });
 
     return createdUser;
