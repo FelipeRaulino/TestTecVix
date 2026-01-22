@@ -9,6 +9,12 @@ export class UserController {
 
   private userService = new UserService();
 
+  async listAll(req: CustomRequest<unknown>, res: Response) {
+    /* const user = req.user as user; */
+    const result = await this.userService.listAll(req.query);
+    return res.status(STATUS_CODE.OK).json(result);
+  }
+
   async createUser(req: CustomRequest<unknown>, res: Response) {
     const result = await this.userService.createNewUser(req.body);
     return res.status(STATUS_CODE.CREATED).json(result);
