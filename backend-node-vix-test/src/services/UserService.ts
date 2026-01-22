@@ -3,11 +3,16 @@ import { STATUS_CODE } from "../constants/statusCode";
 import { AppError } from "../errors/AppError";
 import { UserModel } from "../models/UserModel";
 import { userCreatedSchema } from "../types/validations/User/createUser";
+import { userUpdatedSchema } from "../types/validations/User/updateUser";
 
 export class UserService {
   constructor() {}
 
   private userModel = new UserModel();
+
+  async getById(idUser: string) {
+    return this.userModel.getById(idUser);
+  }
 
   async getByUsername(username: string) {
     return await this.userModel.getByUsername(username);
@@ -50,5 +55,17 @@ export class UserService {
     });
 
     return createdUser;
+  }
+
+  async updateUser(idUser: string, data: unknown) {
+    const validateData = userUpdatedSchema.parse(data);
+    const oldUser = await this.getById(idUser);
+
+    if (!oldUser) {
+      throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
+    }
+
+    const updatedVM = await this.userModel.updateUser(idUser, validateData);
+    return updatedVM;
   }
 }
