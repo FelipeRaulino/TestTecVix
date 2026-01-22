@@ -12,8 +12,16 @@ export const makeUserController = () => {
 
 const userController = makeUserController();
 
+// ========= POSTs =========
+
 userRoutes.post(BASE_PATH, async (req, res) => {
   await userController.createUser(req, res);
+});
+
+// ======== PUTs =========
+
+userRoutes.put(`${BASE_PATH}/:idUser`, async (req, res) => {
+  await userController.updateUser(req, res);
 });
 
 export { userRoutes };
