@@ -42,6 +42,7 @@ export const userCreatedSchema = z.object({
   role: z.enum(["admin", "member", "manager"]).optional(),
   idBrandMaster: z.number().optional(),
   isActive: z.boolean().optional().default(false),
+  lastLoginDate: z.date().nullable().optional(),
 });
 
 export type TUserCreated = z.infer<typeof userCreatedSchema>;
