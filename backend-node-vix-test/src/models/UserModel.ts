@@ -37,4 +37,11 @@ export class UserModel {
       data: { ...data, updatedAt: new Date() },
     });
   }
+
+  async deleteUser(idUser: string) {
+    return await prisma.user.update({
+      where: { idUser },
+      data: { isActive: false, updatedAt: new Date(), deletedAt: new Date() },
+    });
+  }
 }
