@@ -36,14 +36,14 @@ export class UserService {
     const usernameExists = await this.getByUsername(validateData.username);
     const emailExists = await this.getByEmail(validateData.email);
 
-    if (usernameExists) {
+    if (usernameExists && usernameExists.isActive) {
       throw new AppError(
         ERROR_MESSAGE.USERNAME_ALREADY_EXISTS,
         STATUS_CODE.BAD_REQUEST,
       );
     }
 
-    if (emailExists) {
+    if (emailExists && emailExists.isActive) {
       throw new AppError(
         ERROR_MESSAGE.EMAIL_ALREADY_EXISTS,
         STATUS_CODE.BAD_REQUEST,
@@ -67,5 +67,14 @@ export class UserService {
 
     const updatedVM = await this.userModel.updateUser(idUser, validateData);
     return updatedVM;
+  }
+
+  async deleteUser(idUser: string) {
+    const oldUser = await this.getById(idUser);
+    if (!oldUser) {
+      throw new AppError(ERROR_MESSAGE.NOT_FOUND, STATUS_CODE.NOT_FOUND);
+    }
+    const deletedVm = await this.userModel.deleteUser(idUser);
+    return deletedVm;
   }
 }
