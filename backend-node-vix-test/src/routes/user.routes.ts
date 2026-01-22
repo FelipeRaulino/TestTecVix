@@ -15,22 +15,16 @@ export const makeUserController = () => {
 const userController = makeUserController();
 
 // ========= GETs =========
-userRoutes.get(
-  BASE_PATH,
-  // authUser,
-  async (req, res) => {
-    await userController.listAll(req, res);
-  },
-);
+userRoutes.get(BASE_PATH, authUser, async (req, res) => {
+  await userController.listAll(req, res);
+});
 
 // ========= POSTs =========
-
 userRoutes.post(BASE_PATH, authUser, isManagerOrIsAdmin, async (req, res) => {
   await userController.createUser(req, res);
 });
 
 // ======== PUTs =========
-
 userRoutes.put(
   `${BASE_PATH}/:idUser`,
   authUser,
