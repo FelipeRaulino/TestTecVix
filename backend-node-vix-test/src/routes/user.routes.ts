@@ -12,6 +12,15 @@ export const makeUserController = () => {
 
 const userController = makeUserController();
 
+// ========= GETs =========
+userRoutes.get(
+  BASE_PATH,
+  // authUser,
+  async (req, res) => {
+    await userController.listAll(req, res);
+  },
+);
+
 // ========= POSTs =========
 
 userRoutes.post(BASE_PATH, async (req, res) => {
