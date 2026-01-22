@@ -2,6 +2,7 @@ import { ERROR_MESSAGE } from "../constants/erroMessages";
 import { STATUS_CODE } from "../constants/statusCode";
 import { AppError } from "../errors/AppError";
 import { UserModel } from "../models/UserModel";
+import { querySchema } from "../types/validations/Queries/queryListAll";
 import { userCreatedSchema } from "../types/validations/User/createUser";
 import { userUpdatedSchema } from "../types/validations/User/updateUser";
 
@@ -20,6 +21,13 @@ export class UserService {
 
   async getByEmail(email: string) {
     return await this.userModel.getByEmail(email);
+  }
+
+  async listAll(query: unknown) {
+    const validQuery = querySchema.parse(query);
+    return this.userModel.listAll({
+      query: validQuery,
+    });
   }
 
   async createNewUser(data: unknown) {
