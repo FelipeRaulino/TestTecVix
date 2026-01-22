@@ -24,4 +24,13 @@ userRoutes.put(`${BASE_PATH}/:idUser`, async (req, res) => {
   await userController.updateUser(req, res);
 });
 
+// ======== DELETEs ========
+userRoutes.delete(
+  `${BASE_PATH}/:idUser`, //authUser,
+  //isAdmin,
+  async (req, res) => {
+    await userController.deleteUser(req, res);
+  },
+);
+
 export { userRoutes };
