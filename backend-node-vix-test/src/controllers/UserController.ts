@@ -23,4 +23,11 @@ export class UserController {
     );
     return res.status(STATUS_CODE.OK).json(result);
   }
+
+  async deleteUser(req: CustomRequest<unknown>, res: Response) {
+    const { idUser } = req.params;
+    /* const user = req.user as user; */
+    const result = await this.userService.deleteUser(idUser as string);
+    return res.status(STATUS_CODE.OK).json(result);
+  }
 }
