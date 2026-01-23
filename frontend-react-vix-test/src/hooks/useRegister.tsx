@@ -3,11 +3,13 @@ import { toast } from "react-toastify";
 import { api } from "../services/api";
 import { useZBrandInfo } from "../stores/useZBrandStore";
 import { useNavigate } from "react-router-dom";
+import { useZUserProfile } from "../stores/useZUserProfile";
 
 export const useRegister = () => {
   const { t } = useTranslation();
   const { idBrand } = useZBrandInfo();
   const navigate = useNavigate();
+  const { token } = useZUserProfile();
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,6 +41,7 @@ export const useRegister = () => {
       toast.error(t("loginRegister.invalidUsername"));
       return;
     }
+
     const emailError = validateEmail(email);
     const passwordError = validatePasswords(password, confirmPassword);
     if (emailError || passwordError) {
@@ -46,14 +49,23 @@ export const useRegister = () => {
       return;
     }
 
+    const payload = idBrand
+      ? {
+          username,
+          password,
+          email,
+          idBrandMaster: idBrand,
+        }
+      : {
+          username,
+          password,
+          email,
+        };
+
     const response = await api.post({
       url: "/user",
-      data: {
-        username,
-        password,
-        email,
-        idBrandMaster: idBrand,
-      },
+      data: payload,
+      auth: { Authorization: `Bearer ${token}` },
     });
 
     if (response.error) {
