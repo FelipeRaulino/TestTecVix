@@ -1,1 +1,44 @@
-{}
+[
+  {
+    "idUser": "ed4068d6-4b97-49f6-b7ba-a47ad65718c9",
+    "username": "admin-vituax",
+    "password": "$2a$10$7U7Mi7XULGQ0S0NHjmX/Welgvpg2PEX6BCaXdVHv9Vqg5DUSBhZO.",
+    "email": "admin@vituax.com",
+    "profileImgUrl": null,
+    "role": "admin",
+    "idBrandMaster": null,
+    "isActive": true,
+    "lastLoginDate": "2026-01-23T14:17:53.000Z",
+    "createdAt": "2026-01-22T14:29:25.000Z",
+    "updatedAt": "2026-01-23T14:17:53.000Z",
+    "deletedAt": null
+  },
+  {
+    "idUser": "bd4ac81b-3870-42d6-b875-50d0fb571e62",
+    "username": "member-vituax",
+    "password": "$2a$10$MSbbWHDXBZRY7Wpfh/KEFOrH9ZDwZrhynaSEHU4IRJwUpZCs6D56G",
+    "email": "member@vituax.com",
+    "profileImgUrl": null,
+    "role": "member",
+    "idBrandMaster": null,
+    "isActive": true,
+    "lastLoginDate": "2026-01-23T14:14:52.000Z",
+    "createdAt": "2026-01-22T14:31:14.000Z",
+    "updatedAt": "2026-01-23T14:14:52.000Z",
+    "deletedAt": null
+  },
+  {
+    "idUser": "ae6f9002-840a-4b17-a5f1-bf646e470fa1",
+    "username": "manager-vituax",
+    "password": "$2a$10$2tOcWegYAA8jeKnwRMHixOts1C3avG4LC1In7qu6yFRr.aZldJMzy",
+    "email": "manager@vituax.com",
+    "profileImgUrl": null,
+    "role": "manager",
+    "idBrandMaster": null,
+    "isActive": true,
+    "lastLoginDate": "2026-01-23T14:13:55.000Z",
+    "createdAt": "2026-01-22T14:30:34.000Z",
+    "updatedAt": "2026-01-23T14:13:55.000Z",
+    "deletedAt": null
+  }
+]
