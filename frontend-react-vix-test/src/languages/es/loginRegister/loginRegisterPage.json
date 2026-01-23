@@ -30,5 +30,6 @@
   "slideTwoDesc": "Expanda sus servicios sin invertir en su propia plataforma",
   "slideThreeTitle": "Paga por uso",
   "slideThreeDesc": "Precios basados en el uso: ahorro para usted y sus clientes",
-  "descFont": "32px"
+  "descFont": "32px",
+  "unauthenticatedUser": "Usuario no autenticado"
 }

@@ -30,5 +30,6 @@
   "slideTwoDesc": "Expanda seus serviços sem investir em sua própria plataforma",
   "slideThreeTitle": "Pague conforme o uso",
   "slideThreeDesc": "Cobrança baseada no uso: economia para você e seus clientes",
-  "descFont": "28px"
+  "descFont": "28px",
+  "unauthenticatedUser": "Usuário não autenticado."
 }
