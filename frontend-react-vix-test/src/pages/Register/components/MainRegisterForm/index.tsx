@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useZTheme } from "../../../../stores/useZTheme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Stack } from "@mui/material";
 import { TextRob20Font1MC } from "../../../../components/Text1MC";
 import { RegisterForm } from "./RegisterForm";
@@ -9,19 +9,30 @@ import { SwithLanguages } from "../../../../components/SwithLanguages";
 import { SwithThemeMode } from "../../../../components/SwithThemeMode";
 import { LogoBrand } from "../../../../components/LogoBrand";
 import { TextRob18Font2M } from "../../../../components/Text2M";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegister } from "../../../../hooks/useRegister";
 import { useZBrandInfo } from "../../../../stores/useZBrandStore";
+import { useZUserProfile } from "../../../../stores/useZUserProfile";
+import { toast } from "react-toastify";
 
 export const MainRegisterForm = () => {
   const { mode, theme } = useZTheme();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const { goRegister } = useRegister();
   const { idBrand } = useZBrandInfo();
+  const { token } = useZUserProfile();
+
+  useEffect(() => {
+    if (!token) {
+      toast.error(t("loginRegister.unauthenticatedUser"));
+      return navigate("/login");
+    }
+  }, [navigate, t, token]);
 
   return (
     <Stack
