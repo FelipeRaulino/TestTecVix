@@ -31,5 +31,6 @@
   "slideTwoDesc": "Expand your services without investing in your own platform",
   "slideThreeTitle": "Pay as you go",
   "slideThreeDesc": "Usage-based pricing: savings for you and your clients",
-  "descFont": "34px"
+  "descFont": "34px",
+  "unauthenticatedUser": "Unauthenticated user"
 }

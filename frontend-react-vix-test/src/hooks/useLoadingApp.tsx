@@ -7,14 +7,20 @@ import { useBrandMasterInfos } from "./useBrandMasterInfos";
 
 export const useLoadingApp = (notLoginPage: boolean = false) => {
   const [loading, setLoading] = useState(true);
-  const { resetAll: resetAllUser, idUser } = useZUserProfile();
+  const { /* resetAll: resetAllUser, idUser, */ token } = useZUserProfile();
   const { setBrandInfos } = useBrandMasterInfos();
   const path = window.location.pathname;
 
   const fetchTheme = async () => {
     setLoading(true);
+
+    if (!token) {
+      return setLoading(false);
+    }
+
     const theme = await api.get<IBrandMasterResponse | null>({
       url: "/brand-master/self",
+      auth: { Authorization: `Bearer ${token}` },
     });
 
     if (theme.error) {
@@ -35,11 +41,11 @@ export const useLoadingApp = (notLoginPage: boolean = false) => {
     fetchTheme();
   }, [path]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (idUser) {
       resetAllUser();
     }
-  }, []);
+  }, []); */
 
   return {
     loading,

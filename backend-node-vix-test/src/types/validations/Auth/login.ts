@@ -1,9 +1,9 @@
-import { z } from "zod";
+import z from "zod";
 
-export const userCreatedSchema = z.object({
-  username: z
-    .string({ required_error: "Username is required" })
-    .min(1, "Username is required"),
+export const loginSchema = z.object({
+  email: z
+    .string({ required_error: "Email is required" })
+    .email("Invalid email"),
   password: z
     .string({ required_error: "Password is required" })
     .superRefine((val, ctx) => {
@@ -35,14 +35,6 @@ export const userCreatedSchema = z.object({
           message: "Password must contain at least 2 special characters",
         });
     }),
-  email: z
-    .string({ required_error: "Email is required" })
-    .email("Invalid email"),
-  profileImgUrl: z.string().nullable().optional(),
-  role: z.enum(["admin", "member", "manager"]).optional(),
-  idBrandMaster: z.number().optional(),
-  isActive: z.boolean().optional().default(true),
-  lastLoginDate: z.date().nullable().optional(),
 });
 
-export type TUserCreated = z.infer<typeof userCreatedSchema>;
+export type TLoginSchema = z.infer<typeof loginSchema>;
