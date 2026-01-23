@@ -41,7 +41,7 @@ export const userCreatedSchema = z.object({
   profileImgUrl: z.string().nullable().optional(),
   role: z.enum(["admin", "member", "manager"]).optional(),
   idBrandMaster: z.number().optional(),
-  isActive: z.boolean().optional().default(false),
+  isActive: z.boolean().optional().default(true),
   lastLoginDate: z.date().nullable().optional(),
 });
 
