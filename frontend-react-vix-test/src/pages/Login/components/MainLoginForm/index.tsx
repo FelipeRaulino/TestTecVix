@@ -9,13 +9,13 @@ import { NewOnVituaX } from "./NewOnVituaX";
 import { Contact } from "./Contact";
 import { SwithLanguages } from "../../../../components/SwithLanguages";
 import { SwithThemeMode } from "../../../../components/SwithThemeMode";
-// import { LogoBrand } from "../../../../components/LogoBrand";
 import { useLogin } from "../../../../hooks/useLogin";
 import { useZGlobalVar } from "../../../../stores/useZGlobalVar";
 import { ModalUserNotActive } from "./ModalUserNotActive";
 import { LogoBrand } from "../../../../components/LogoBrand";
 import { useZBrandInfo } from "../../../../stores/useZBrandStore";
 import { InstallButton } from "./InstallButton";
+import { toast } from "react-toastify";
 
 export const MainLoginForm = () => {
   const { mode, theme } = useZTheme();
@@ -34,6 +34,10 @@ export const MainLoginForm = () => {
   };
 
   const handleSend = () => {
+    if ((!username && !email) || !password) {
+      toast.error("Please, provide the credentials.");
+    }
+
     goLogin({ username, password, email });
   };
 
