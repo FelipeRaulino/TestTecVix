@@ -400,15 +400,15 @@ Exemplo:
 ```
 Admin:
   Email: admin@vituax.com
-  Senha: Admin@123
+  Senha: UserTest@123#!
 
 Manager:
   Email: manager@vituax.com
-  Senha: Manager@123
+  Senha: ManagerVituax@123#!
 
 Member:
   Email: member@vituax.com
-  Senha: Member@123
+  Senha: MemberVituax@123#!
 ```
 
 ---
