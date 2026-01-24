@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { IFormatData, IGenericSocket, mockSocket } from "../types/socketType";
 import { EOS } from "./useZVMSugestion";
+import { getRandomChartData } from "../utils/getRandomChartData";
 
 export interface IGlobalVar {
   isOpenSideBar: boolean;
@@ -31,8 +32,8 @@ const INIT_STATE: IGlobalVar = {
   currentIdVM: null,
   currentVMName: null,
   currentVMOS: null,
-  cpuUsageData: [],
-  ramMemoryUsageData: [],
+  cpuUsageData: getRandomChartData(),
+  ramMemoryUsageData: getRandomChartData(),
   socketRef: mockSocket,
   search: null,
   searchGlobalHeader: "",
