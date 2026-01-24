@@ -9,6 +9,25 @@ import bcrypt from "bcryptjs";
 export class AuthService {
   private userModel = new UserModel();
 
+  async refreshToken(idUser: string, requesterId: string) {
+    if (idUser !== requesterId) {
+      throw new AppError(ERROR_MESSAGE.UNAUTHORIZED, STATUS_CODE.UNAUTHORIZED);
+    }
+
+    const user = await this.userModel.getById(idUser);
+
+    if (!user) {
+      throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
+    }
+
+    const token = genToken({
+      idUser: user.idUser,
+      role: user.role,
+    });
+
+    return { token };
+  }
+
   async login(data: TLoginSchema) {
     const validateData = loginSchema.parse(data);
 
