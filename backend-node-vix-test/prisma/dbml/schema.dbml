@@ -50,6 +50,8 @@ Table vM {
   deletedAt DateTime
   os String
   brandMaster brandMaster
+  pass String [not null, default: '$2a$10$LZnsY.42LsXhb1gF6qzmEebBR4/UWQu/SvzMOsRLZiK/M659ejE5W']
+  location ETaskLocation
 }
 
 Table user {
@@ -78,6 +80,11 @@ Enum ERole {
   admin
   manager
   member
+}
+
+Enum ETaskLocation {
+  bre_barueri
+  usa_miami
 }
 
 Ref: vM.idBrandMaster > brandMaster.idBrandMaster

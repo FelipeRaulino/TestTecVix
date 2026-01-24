@@ -65,6 +65,9 @@ model vM {
   os            String?
   brandMaster   brandMaster? @relation(fields: [idBrandMaster], references: [idBrandMaster])
 
+  pass          String       @default("$2a$10$LZnsY.42LsXhb1gF6qzmEebBR4/UWQu/SvzMOsRLZiK/M659ejE5W")
+  location      ETaskLocation?
+
   @@index([idBrandMaster], map: "vM_idBrandMaster_fkey")
 }
 
@@ -97,4 +100,9 @@ enum ERole {
   admin
   manager
   member
+}
+
+enum ETaskLocation {
+  bre_barueri
+  usa_miami
 }
