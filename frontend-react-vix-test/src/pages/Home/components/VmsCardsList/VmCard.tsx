@@ -26,6 +26,7 @@ import { TextRob14Font1Xs } from "../../../../components/Text1Xs";
 import { TerminalIcon } from "../../../../icons/TerminalIcon";
 import { MonitorIcon } from "../../../../icons/MonitorIcon";
 import { IVMTask, taskMock } from "../../../../types/VMTypes";
+import { getRandomChartData } from "../../../../utils/getRandomChartData";
 
 export interface IVmCardProps {
   vmId: number;
@@ -72,6 +73,8 @@ export const VmCard = ({
     setCurrentIdVM,
     setCurrentVMOS,
     setCurrentVMName,
+    setCpuUsageData,
+    setRamMemoryUsageData,
   } = useZGlobalVar();
 
   const {
@@ -80,6 +83,7 @@ export const VmCard = ({
     getVMById: getVMByIdResource,
     isLoading,
     getOS,
+    updateVMStatus,
   } = useVmResource();
 
   const getVMById = async () => {
@@ -119,12 +123,14 @@ export const VmCard = ({
     setStatusState("STOPPED");
     if (checkStatus(statusState, taskState?.action).isRunning)
       setShowConfirmation(true);
+    updateVMStatus({ idVM: vmId, status: "STOPPED" });
   };
 
   const handleStart = () => {
     setStatusState("RUNNING");
     if (!checkStatus(statusState, taskState?.action).isRunning)
       setShowConfirmation(true);
+    updateVMStatus({ idVM: vmId, status: "RUNNING" });
   };
 
   const closeModalWarning = () => {
@@ -237,7 +243,7 @@ export const VmCard = ({
               backgroundColor: actionExec ? theme[mode].blue : "transparent",
               border:
                 checkStatus(statusState, taskState?.action).isStopped ||
-                  checkStatus(statusState, taskState?.action).isPaused
+                checkStatus(statusState, taskState?.action).isPaused
                   ? "1px solid"
                   : "0px solid",
               borderColor: actionExec ? theme[mode].blue : theme[mode].tertiary,
@@ -496,6 +502,8 @@ export const VmCard = ({
               setCurrentVMName(vmNameState as string);
               setCurrentIdVM(vmId as number);
               setCurrentVMOS(os);
+              setCpuUsageData(getRandomChartData());
+              setRamMemoryUsageData(getRandomChartData());
             }}
             sx={{
               width: "100%",
@@ -529,7 +537,7 @@ export const VmCard = ({
                 checkStatus(statusState, taskState?.action, taskState?.task)
                   .isWaiting
               }
-              onClick={() => { }}
+              onClick={() => {}}
               sx={{
                 width: "40px",
                 height: "27px",
@@ -554,7 +562,7 @@ export const VmCard = ({
                 checkStatus(statusState, taskState?.action, taskState?.task)
                   .isWaiting
               }
-              onClick={() => { }}
+              onClick={() => {}}
               sx={{
                 width: "40px",
                 height: "27px",

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   XAxis,
   YAxis,
@@ -14,10 +13,9 @@ import { Stack, Typography } from "@mui/material";
 import { useZTheme } from "../../../../stores/useZTheme";
 import { useTranslation } from "react-i18next";
 import { useZGlobalVar } from "../../../../stores/useZGlobalVar";
-import { IFormatData } from "../../../../types/socketType";
 
 export const MainGraphic = () => {
-  const [chartData] = useState<IFormatData[]>([]);
+  const { cpuUsageData: chartData } = useZGlobalVar();
   const { theme, mode } = useZTheme();
   const { t } = useTranslation();
 
