@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IGenericSocket, mockSocket } from "../types/socketType";
+import { IFormatData, IGenericSocket, mockSocket } from "../types/socketType";
 import { EOS } from "./useZVMSugestion";
 
 export interface IGlobalVar {
@@ -18,6 +18,8 @@ export interface IGlobalVar {
   search: null | string;
   searchGlobalHeader: string;
   totalCountVMs: number;
+  cpuUsageData: IFormatData[];
+  ramMemoryUsageData: IFormatData[];
 }
 
 const INIT_STATE: IGlobalVar = {
@@ -29,6 +31,8 @@ const INIT_STATE: IGlobalVar = {
   currentIdVM: null,
   currentVMName: null,
   currentVMOS: null,
+  cpuUsageData: [],
+  ramMemoryUsageData: [],
   socketRef: mockSocket,
   search: null,
   searchGlobalHeader: "",
@@ -50,6 +54,8 @@ interface IGlobalVarState extends IGlobalVar {
   setSearch: (search: string | null) => void;
   setSearchGlobalHeader: (search: string) => void;
   setTotalCountVMs: (totalCountVMs: number) => void;
+  setCpuUsageData: (cpuUsageData: IFormatData[]) => void;
+  setRamMemoryUsageData: (ramMemoryData: IFormatData[]) => void;
   resetAll: () => void;
 }
 
@@ -79,5 +85,9 @@ export const useZGlobalVar = create<IGlobalVarState>((set) => ({
   setSpiceIdOpened: (spiceIdOpened) =>
     set((state) => ({ ...state, spiceIdOpened })),
   setCurrentVMOS: (currentVMOS) => set((state) => ({ ...state, currentVMOS })),
+  setCpuUsageData: (cpuUsageData) =>
+    set((state) => ({ ...state, cpuUsageData })),
+  setRamMemoryUsageData: (ramMemoryUsageData) =>
+    set((state) => ({ ...state, ramMemoryUsageData })),
   resetAll: () => set((state) => ({ ...state, ...INIT_STATE })),
 }));
