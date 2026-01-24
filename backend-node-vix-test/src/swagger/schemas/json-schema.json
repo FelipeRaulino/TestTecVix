@@ -271,6 +271,20 @@
               "type": "null"
             }
           ]
+        },
+        "pass": {
+          "type": "string",
+          "default": "$2a$10$LZnsY.42LsXhb1gF6qzmEebBR4/UWQu/SvzMOsRLZiK/M659ejE5W"
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "bre_barueri",
+            "usa_miami"
+          ]
         }
       }
     },
