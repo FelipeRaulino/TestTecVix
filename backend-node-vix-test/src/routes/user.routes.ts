@@ -3,6 +3,7 @@ import { UserController } from "../controllers/UserController";
 import { API_VERSION, ROOT_PATH } from "../constants/basePathRoutes";
 import { isManagerOrIsAdmin } from "../auth/isManagerOrIsAdmin";
 import { authUser } from "../auth/authUser";
+import { AuthController } from "../controllers/AuthController";
 
 const BASE_PATH = API_VERSION.V1 + ROOT_PATH.USER; //api/v1/user
 
@@ -12,11 +13,20 @@ export const makeUserController = () => {
   return new UserController();
 };
 
+export const makeAuthController = () => {
+  return new AuthController();
+};
+
 const userController = makeUserController();
+const authController = makeAuthController();
 
 // ========= GETs =========
 userRoutes.get(BASE_PATH, authUser, async (req, res) => {
   await userController.listAll(req, res);
+});
+
+userRoutes.get(`${BASE_PATH}/token/:idUser`, authUser, async (req, res) => {
+  await authController.refreshToken(req, res);
 });
 
 // ========= POSTs =========
