@@ -26,7 +26,7 @@ export const useVmResource = () => {
   const [isLoadingUpdateVM, setIsLoadingUpdateVM] = useState(false);
   const [isLoadingDeleteVM, setIsLoadingDeleteVM] = useState(false);
   const { t } = useTranslation();
-  const { idBrand, role } = useZUserProfile();
+  const { idBrand, token, role } = useZUserProfile();
   const navigate = useNavigate();
   const { getAuth } = useAuth();
 
@@ -178,7 +178,7 @@ export const useVmResource = () => {
     const response = await api.put<IVMCreatedResponse>({
       url: `/vm/${idVM}`,
       data: { status },
-      auth,
+      auth: { Authorization: `Bearer ${token}` },
     });
     if (response.error) {
       toast.error(response.message);
@@ -216,7 +216,7 @@ export const useVmResource = () => {
     const auth = await getAuth();
     const response = await api.get<IVMCreatedResponse>({
       url: `/vm/${idVM}`,
-      auth,
+      auth: { Authorization: `Bearer ${token}` },
       tryRefetch: true,
     });
     setIsLoading(false);
