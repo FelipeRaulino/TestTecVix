@@ -513,13 +513,13 @@ git commit -m "docs: atualiza README com credenciais de teste"
 
 - [x] Implementar filtro de **pesquisa** (busca por nome)
 - [x] Implementar filtro por **status da VM**
-- [ ] Implementar filtro por **MSP/BrandMaster**
-- [ ] Implementar filtro **"Apenas minhas VMs"** (VMs exclusivas da mesma BrandMaster do usuário logado)
+- [x] Implementar filtro por **MSP/BrandMaster**
+- [x] Implementar filtro **"Apenas minhas VMs"** (VMs exclusivas da mesma BrandMaster do usuário logado)
 
 **Ações:**
 
-- [ ] Possibilitar **stop/start** da VM pela tabela
-- [ ] Possibilitar **stop/start** da VM pelo modal de edição
+- [x] Possibilitar **stop/start** da VM pela tabela
+- [x] Possibilitar **stop/start** da VM pelo modal de edição
 
 **Modal de Edição:**
 
