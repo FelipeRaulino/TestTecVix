@@ -14,7 +14,8 @@ export interface IVMResource {
   pass: string;
   status?: string | null;
   networkType?: ENetworkType;
-  vmLocalization?: { label: string | null; value: unknown } | null;
+  /* vmLocalization?: { label: string | null; value: unknown } | null; */
+  location: string;
   oldVM?: {
     vmName: string;
     vCPU: number;
