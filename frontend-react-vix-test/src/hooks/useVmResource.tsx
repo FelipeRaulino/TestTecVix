@@ -84,6 +84,28 @@ export const useVmResource = () => {
     },
   ];
 
+  const vmOperatingSystemsOptions: { label: string; value: EOS }[] = [
+    { label: "Ubuntu 24.04 LTS", value: EOS.ubuntu2404 },
+    { label: "Ubuntu 22.04 LTS", value: EOS.ubuntu2204 },
+    { label: "Ubuntu 20.04 LTS", value: EOS.ubuntu2004 },
+    { label: "Debian 12", value: EOS.debian12 },
+    { label: "Debian 11", value: EOS.debian11 },
+    { label: "openSUSE", value: EOS.opensuse },
+    { label: "Arch Linux", value: EOS.archlinux },
+    { label: "Fedora 40", value: EOS.fedora40 },
+    { label: "CentOS 9", value: EOS.centos9 },
+    { label: "CentOS 10", value: EOS.centos10 },
+    { label: "Windows 10", value: EOS.win10 },
+    { label: "Windows Server 2019 Standard", value: EOS.win2019std },
+    { label: "Windows Server 2022 Standard", value: EOS.win2022std },
+    { label: "Rocky Linux 10", value: EOS.rockylinux10 },
+    { label: "Edge Protect v1", value: EOS.edgeprotectv1 },
+    { label: "3CX", value: EOS.os3cx },
+    { label: "Yeastar", value: EOS.yeastar },
+    { label: "MikroTik", value: EOS.mikrotik },
+    { label: "pfSense", value: EOS.pfsense },
+  ];
+
   const networkTypeOptions: { value: ENetworkType; label: string }[] = [
     {
       value: ENetworkType.public,
@@ -344,5 +366,6 @@ export const useVmResource = () => {
     getOSDeletedLabel,
     monitoringVMStatus,
     updateVMStatus,
+    vmOperatingSystemsOptions,
   };
 };
