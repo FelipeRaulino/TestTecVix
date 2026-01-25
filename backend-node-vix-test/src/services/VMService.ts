@@ -49,8 +49,17 @@ export class VMService {
       throw new AppError(ERROR_MESSAGE.NOT_FOUND, STATUS_CODE.NOT_FOUND);
     }
 
-    const updatedVM = await this.vMModel.updateVM(idVM, validateDataSchema);
-    return updatedVM;
+    if (validateDataSchema.pass) {
+      const encriptedPassword = await bcrypt.hash(validateDataSchema.pass, 10);
+      const updatedVM = await this.vMModel.updateVM(idVM, {
+        ...validateDataSchema,
+        pass: encriptedPassword,
+      });
+      return updatedVM;
+    } else {
+      const updatedVM = await this.vMModel.updateVM(idVM, validateDataSchema);
+      return updatedVM;
+    }
   }
 
   async deleteVM(idVM: number, user: user) {
