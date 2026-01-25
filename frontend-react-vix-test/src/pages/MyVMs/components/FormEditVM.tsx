@@ -44,7 +44,7 @@ export const FormEditVM = ({ onClose }: IProps) => {
 
   const { statusHashMap } = useStatusInfo();
   const { currentVM, setCurrentVM } = useZMyVMsList();
-  const [vmPassword, setVmPassword] = useState(currentVM.pass);
+  const [vmPassword, setVmPassword] = useState("");
   const [vmName, setVmName] = useState(currentVM.vmName);
   const [vmSO, setVmSO] = useState<TOptions>({
     label: currentVM.os,
@@ -101,8 +101,10 @@ export const FormEditVM = ({ onClose }: IProps) => {
       oldVM: currentVM,
     };
     setOpenConfirm(false);
-    const isValidPass = validPassword(vmPassword);
-    if (!isValidPass) return;
+    if (vmPassword.length > 0) {
+      const isValidPass = validPassword(vmPassword);
+      if (!isValidPass) return;
+    }
     await updateVM(
       {
         ...vm,
@@ -112,7 +114,8 @@ export const FormEditVM = ({ onClose }: IProps) => {
         disk: vmDisk,
         hasBackup: hasBackup,
         os: String(vmSO?.value) || "",
-        pass: vmPassword,
+        ...(vmPassword.length > 0 && { pass: vmPassword }),
+        location: vmLocalization.value as string,
       },
       currentVM.idVM,
     );
@@ -138,13 +141,7 @@ export const FormEditVM = ({ onClose }: IProps) => {
   };
 
   const disabledBtn =
-    !vmName ||
-    !vmSO ||
-    !vmvCpu ||
-    !vmMemory ||
-    !vmDisk ||
-    !vmPassword ||
-    !vmLocalization;
+    !vmName || !vmSO || !vmvCpu || !vmMemory || !vmDisk || !vmLocalization;
 
   return (
     <>
@@ -203,12 +200,11 @@ export const FormEditVM = ({ onClose }: IProps) => {
             }}
           >
             <LabelInputVM
-              onChange={() => {}}
+              onChange={setVmPassword}
               value={vmPassword}
               label={t("createVm.password")}
-              placeholder={t("createVm.userPassword")}
+              placeholder={t("createVm.updateUserPassword")}
               type="password"
-              disabled
             />
             <PasswordValidations vmPassword={vmPassword} />
           </Stack>

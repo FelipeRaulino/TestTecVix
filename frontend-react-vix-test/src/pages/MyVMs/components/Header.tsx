@@ -195,15 +195,17 @@ export const Header = () => {
               });
               return;
             }
-            setSelectedMSP(null);
+            if (val === null) {
+              setSelectedMSP(null);
+            }
           }}
           value={
             selectedMSP
               ? {
-                id: selectedMSP.idBrandMaster,
-                label: selectedMSP.brandName,
-                value: selectedMSP,
-              }
+                  id: selectedMSP.idBrandMaster,
+                  label: selectedMSP.brandName,
+                  value: selectedMSP,
+                }
               : null
           }
           sxContainer={{
