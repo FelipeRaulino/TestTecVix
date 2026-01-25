@@ -7,12 +7,13 @@ import CustomPagination from "../../components/Pagination/CustomPagination";
 import { useZMyVMsList } from "../../stores/useZMyVMsList";
 import { useMyVMList } from "../../hooks/useMyVMList";
 import { useEffect } from "react";
-import { useZUserProfile } from "../../stores/useZUserProfile";
+/* import { useZUserProfile } from "../../stores/useZUserProfile"; */
 import { useZGlobalVar } from "../../stores/useZGlobalVar";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { SkeletonTable } from "./components/SkeletonTable";
 import { ModalEditVM } from "./components/ModalEditVM";
 import { AbsoluteBackDrop } from "../../components/AbsoluteBackDrop";
+import { useZUserProfile } from "../../stores/useZUserProfile";
 
 export const MyVMsPage = () => {
   const {
@@ -35,11 +36,12 @@ export const MyVMsPage = () => {
     selectedMSP,
   } = useZMyVMsList();
   const { fetchMyVmsList, isLoading } = useMyVMList();
-  const { idBrand } = useZUserProfile();
+  /* const { idBrand } = useZUserProfile(); */
   const { isOpenSideBar } = useZGlobalVar();
   const { width } = useWindowSize();
   const { updateThisVm, setUpdateThisVm } = useZGlobalVar();
   const { socketRef } = useZGlobalVar();
+  const { idBrand } = useZUserProfile();
 
   const handlerFetchVMList = async (page: number = 0) => {
     const { totalCount, vmList } = await fetchMyVmsList({
@@ -47,7 +49,13 @@ export const MyVMsPage = () => {
       page: page || currentPage - 1 || 0,
       orderBy: orderBy ? `${orderBy}:${order}` : undefined,
       limit,
-      idBrandMaster: idBrand,
+      idBrandMaster: onlyMyVMs
+        ? idBrand === null
+          ? -1
+          : idBrand
+        : selectedMSP
+          ? selectedMSP.idBrandMaster
+          : undefined,
       status,
     });
     setVMList(vmList);
