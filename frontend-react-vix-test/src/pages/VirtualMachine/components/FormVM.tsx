@@ -107,6 +107,7 @@ export const FormVM = () => {
       hasBackup: hasBackup,
       os: String(vmSO?.value) || "",
       pass: vmPassword,
+      location: vmLocalization.value as string,
     });
   };
 
@@ -225,7 +226,7 @@ export const FormVM = () => {
             value={vmLocalization}
             onChange={setVmLocalization}
           />
-          <BTNISOsSection vmNameLabel={vmSO?.label} />
+          <BTNISOsSection /* vmNameLabel={vmSO?.label} */ />
         </Stack>
         {/* Sliders */}
         <Stack
