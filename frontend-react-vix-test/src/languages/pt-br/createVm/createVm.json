@@ -11,6 +11,7 @@
   "name": "Nome",
   "password": "Senha",
   "userPassword": "Sua senha de usuário",
+  "updateUserPassword": "Atualize sua senha de usuário (Opcional)",
   "sampleName": "Exemplo: VM 1 ...",
   "network": "Rede",
   "operationalSystem": "Sistema Operacional (SOP)",

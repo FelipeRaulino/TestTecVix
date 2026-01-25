@@ -11,6 +11,7 @@
   "name": "Name",
   "password": "Password",
   "userPassword": "Your user password",
+  "updateUserPassword": "Update your user password (Optional)",
   "sampleName": "Example: VM 1 ...",
   "network": "Network",
   "operationalSystem": "Operating System (OS)",
