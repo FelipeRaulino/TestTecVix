@@ -45,30 +45,64 @@ export const MspTable = () => {
     setShowAddressFields,
     setIsPoc,
     isPocFilter,
+    modalOpen,
+    companyName,
+    locality,
+    cnpj,
+    phone,
+    sector,
+    contactEmail,
+    city,
+    countryState,
+    cep,
+    street,
+    streetNumber,
+    mspDomain,
+    isPoc,
+    brandLogoUrl,
   } = useZMspRegisterPage();
 
-  const { listAllBrands } = useBrandMasterResources();
+  const { listAllBrands, editBrandMaster } = useBrandMasterResources();
 
   const { role } = useZUserProfile();
 
-  useEffect(() => {
-    const fetchMsps = async () => {
-      const response = await listAllBrands();
-      return setMspList(response.result);
-    };
+  const fetchMsps = async () => {
+    const response = await listAllBrands();
+    return setMspList(response.result);
+  };
 
+  useEffect(() => {
     fetchMsps();
-  }, []);
+  }, [modalOpen]);
 
   const startEditing = (index: number) => {
     setShowAddressFields(true);
     setIsEditing([index]);
   };
 
-  const saveEdit = () => {
+  const saveEdit = async () => {
+    await editBrandMaster(isEditing[0], {
+      brandName: companyName,
+      location: locality,
+      cnpj,
+      smsContact: phone,
+      setorName: sector,
+      emailContact: contactEmail,
+      cep,
+      city,
+      state: countryState,
+      street,
+      placeNumber: streetNumber,
+      domain: mspDomain,
+      isPoc,
+      brandLogo: brandLogoUrl,
+    });
     setShowAddressFields(false);
     setIsEditing([]);
     resetAll();
+    setModalOpen("editedMsp");
+    await fetchMsps();
+    setActiveStep(0);
   };
 
   const handleEdit = (index: number) => {
@@ -241,8 +275,9 @@ export const MspTable = () => {
                     padding: "0 10px",
                     fontWeight: "400",
                     borderRadius: "12px",
-                    border: `1px solid ${msp.isActive ? theme[mode].ok : theme[mode].danger
-                      }`,
+                    border: `1px solid ${
+                      msp.isActive ? theme[mode].ok : theme[mode].danger
+                    }`,
                     color: msp.isActive ? theme[mode].ok : theme[mode].danger,
                   }}
                 >
