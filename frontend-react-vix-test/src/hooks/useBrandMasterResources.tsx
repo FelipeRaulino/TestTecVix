@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useZBrandInfo } from "../stores/useZBrandStore";
 import { useUploadFile } from "./useUploadFile";
 import { IBrandMasterBasicInfo } from "../types/BrandMasterTypes";
-
+import { useZMspRegisterPage } from "../stores/useZMspRegisterPage";
 
 interface IUpdateBrandMaster {
   brandName?: string;
@@ -41,15 +41,18 @@ interface IUpdateBrandMaster {
 
 interface IBrandMasterResource {
   brandName: string;
+  location: string;
+  cnpj: string;
+  smsContact: string;
+  setorName: string;
+  emailContact: string;
+  cep: string;
+  city: string;
+  state: string;
   isActive: boolean;
   brandLogo: string;
   domain: string;
-  setorName: string;
   fieldName: string;
-  location: string;
-  city: string;
-  emailContact: string;
-  smsContact: string;
   timezone: string;
   createdAt: string | Date;
   updatedAt: string | Date;
@@ -77,7 +80,7 @@ interface ICreateNewBrandMaster {
   admPhone: string;
   admPassword: string;
   brandLogo: string;
-  position: "admin";
+  position: "admin" | string;
   mspDomain: string;
   cityCode?: number;
   district?: string;
@@ -124,8 +127,10 @@ export const useBrandMasterResources = () => {
     setBrandInfo,
     idBrand: idBrandInfo,
     domain,
+    resetAll,
   } = useZBrandInfo();
   const { getFileByObjectName } = useUploadFile();
+  const { setActiveStep, setModalOpen } = useZMspRegisterPage();
 
   const updateBrandMaster = async ({
     brandName,
@@ -239,6 +244,7 @@ export const useBrandMasterResources = () => {
       toast.error(t("generic.errorOlnlyAdmin"));
       return;
     }
+
     const auth = await getAuth();
     setIsLoading(true);
     const response = await api.post<INewMSPResponse>({
@@ -248,7 +254,7 @@ export const useBrandMasterResources = () => {
         brandName: data.companyName,
         isActive: true,
         brandLogo: data.brandLogo,
-        domain: undefined,
+        domain: data.mspDomain,
         setorName: data.sector,
         fieldName: undefined,
         location: data.locality,
@@ -273,6 +279,9 @@ export const useBrandMasterResources = () => {
       return;
     }
 
+    resetAll();
+    setActiveStep(0);
+    setModalOpen("createdMsp");
     return { brandMaster: response.data };
   };
 
@@ -346,6 +355,7 @@ export const useBrandMasterResources = () => {
         street: data.street,
         placeNumber: data.placeNumber,
         smsContact: data.smsContact,
+        domain: data.domain,
         brandLogo: data.brandLogo,
         cityCode: data?.cityCode ? data.cityCode : undefined,
         district: data?.district ? data.district : undefined,

@@ -16,6 +16,7 @@ import { ModalDeleteVMsFromMSP } from "./ModalDeleteVMsFromMSP";
 import { useBrandMasterResources } from "../../hooks/useBrandMasterResources";
 import { AbsoluteBackDrop } from "../../components/AbsoluteBackDrop";
 import { useVmResource } from "../../hooks/useVmResource";
+import MSPRegisterForm from "./MspRegisterForm/MspRegisterForm";
 
 export const MSPRegisterPage = () => {
   const { theme, mode } = useZTheme();
@@ -86,6 +87,8 @@ export const MSPRegisterPage = () => {
         paddingLeft: "40px",
         paddingRight: "40px",
         paddingBottom: "40px",
+        flexDirection: "column !important",
+        gap: "24px",
       }}
       subtitle={
         <Box
@@ -114,6 +117,7 @@ export const MSPRegisterPage = () => {
       // sxTitleSubTitle= estilização do componente title e subtitle
     >
       {Boolean(isLoading || isLoadingDeleteVM) && <AbsoluteBackDrop open />}
+      <MSPRegisterForm />
       <Stack
         sx={{
           width: "100%",

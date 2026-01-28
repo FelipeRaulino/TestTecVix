@@ -18,10 +18,19 @@ export interface IBrandInfo {
   emailContact?: string;
   smsContact?: string;
   timezone?: string;
-
+  cnpj?: string;
+  cep?: string;
+  state?: string;
+  street?: string;
+  placeNumber?: string;
+  isPoc?: boolean;
   manual?: null | string;
   termsOfUse?: null | string;
   privacyPolicy?: null | string;
+  admName?: string;
+  admEmail?: string;
+  admPhone?: string;
+  admPassword?: string;
 }
 const INIT_STATE: IBrandInfo = {
   idBrand: null,
@@ -41,9 +50,19 @@ const INIT_STATE: IBrandInfo = {
   emailContact: "",
   smsContact: "",
   timezone: "",
+  cnpj: "",
+  cep: "",
+  state: "",
+  street: "",
+  placeNumber: "",
+  isPoc: false,
   manual: null,
   termsOfUse: null,
   privacyPolicy: null,
+  admName: "",
+  admEmail: "",
+  admPhone: "",
+  admPassword: "",
 };
 
 interface IBrandInfoState extends IBrandInfo {
